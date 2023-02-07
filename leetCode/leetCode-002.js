@@ -78,6 +78,38 @@ function addToList_Iteration (l1, l2) {
 	return result;
 }
 
+// 递归法
+function addToList_recursive (l1, l2) {
+	let total = l1.val + l2.val;
+	let next1 = Math.trunc(total / 10); // 整数部分 进位点值
+	let res = new ListNode(total % 10); // 小数部分
+
+	// 两个链表和进位的值有一个不为空就需要继续创建节点
+	if(l1.next != null || l2.next != null || next1 != 0) {
+		if (l1.next != null ) {
+			l1 = l1.next;
+		} 
+		// 如果l1 的next不存在，则用0进行创建
+		else {
+			l1 = new ListNode(0);
+		}
+
+		if (l2.next != null ) {
+			l2 = l2.next;
+		} 
+		// 如果l2 的next不存在，则用0进行创建
+		else {
+			l2 = new ListNode(0);
+		}
+		// 将next1 整数部分直接赋值给l1的值
+		l1.val = l1.val + next1;
+		res.next = addToList_recursive(l1, l2);
+	}
+
+	return res;
+}
+
+
 function main () {
 	let nums1 = [2,4,3];
 	let l1 = getList(nums1);
@@ -87,10 +119,17 @@ function main () {
 	console.log("l2-------=", l2);
 
 	let addToList1 = addToList_Iteration(l1, l2);
-	let result = addToList1;
-	while (result) {
-		console.log("addToList1-----=", result.val);
-		result = result.next;
+	let result1 = addToList1;
+	while (result1) {
+		console.log("addToList1-----=", result1.val);
+		result1 = result1.next;
+	}
+
+	let addToList2 = addToList_recursive(l1, l2);
+	let result2 = addToList2;
+	while (result2) {
+		console.log("addToList2-----=", result2.val);
+		result2 = result2.next;
 	}
 }
 
