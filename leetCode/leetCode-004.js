@@ -53,8 +53,7 @@ function mergeTwoListIteration (l1, l2) {
 function mergeTwoListRecursion (l1, l2) {
 	// 递归终止条件，如果有一个链表为空，则将后续全部返回
 	if(l1 == null || l2 == null) {
-		if(l1) return l1;
-		if(l2) return l2;
+		return l1 == null ? l2 : l1;
 	}
 
 	// 如果l1<=l2, 则将l1.next和l2作为整体
