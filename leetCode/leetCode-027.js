@@ -16,22 +16,36 @@
    你不需要考虑数组中超出长度后面的元素
 */
 
+function removeElement (list, val) {
+	if(list == null || list.length == 0) {
+		return 0;
+	}
 
+	let left = 0, right = list.length - 1;
+	while(left < right) {
+		// 如果left所在值不是val，则移动left的指针
+		while (left < right && list[left] != val) {
+			left+=1;
+		}
+		// 如果right所在值不是val，则移动right的指针
+		while (left < right && list[right] == val) {
+			right-=1;
+		}
+		// 交换左右两个值
+		[list[left], list[right]] = [list[right], list[left]];
+		console.log("list: ------", list);
+	}
+
+	// 如果当前left所指向的值是val则返回left
+	// 如果left所指向的值不是val则需要返回left + 1
+	return list[left] == val ? left : left + 1;
+}
 
 function main () {
-	let array = [1,2,3,4,5];
-	let list = getList(array);
-	// let result1 = swapNodes_iteration(list);
-	// while (result1) {
-	// 	console.log("result1:-------", result1.val);
-	// 	result1 = result1.next;
-	// }
-	
-	let result2 = swapNodes_iteration(list);
-	while (result2) {
-		console.log("result2:-------", result2.val);
-		result2 = result2.next;
-	}
+	let val = 2;
+	let array = [0,1,2,2,3,0,4,2];
+	let result = removeElement(array, val);
+	console.log("result: --- ", result);
 }
 
 main()
