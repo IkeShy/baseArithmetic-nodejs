@@ -70,14 +70,33 @@ function getCrossMax (nums, left, right) {
 	return leftMax + rightMax;
 }
 
+// 动态规划
+function dynamicFunc (nums) {
+	let dp = [];
+	dp[0] = nums[0];
+	result = nums[0];
+
+	for (i = 1; i < nums.length; i++) {
+		dp[i] = Math.max(dp[i - 1] + nums[i], nums[i]);
+		result = Math.max(result, dp[i]);
+	}
+
+	console.log("dp", dp);
+
+	return result;
+}
+
 
 function main () {
 	let nums = [-2,1,-3,4,-1,2,1,-5,4];
 	//let commonResult = commonFunc(nums);
 	//console.log("commonResult", commonResult);
 
-	let devideResult = divideFunc(nums);
-	console.log("devideResult", devideResult);
+	// let devideResult = divideFunc(nums);
+	// console.log("devideResult", devideResult);
+
+	let dynamicResult = dynamicFunc(nums);
+	console.log("dynamicResult", dynamicResult);
 }
 
 main()
