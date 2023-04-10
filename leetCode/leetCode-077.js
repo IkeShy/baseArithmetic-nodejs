@@ -14,11 +14,28 @@
 */
 
 
+function createList (n, k) {
+	let result = [];
+	backtracking(n,k,result,1,[]);
+	return result;
+}
+
+function backtracking (n, k, result, begin, list) {
+	if(list.length == k) {
+		let copy = list.slice(0);
+		result.push(copy);
+		return;
+	}
+
+	for (let i = begin; i <=n; i++) {
+		list.push(i);
+		backtracking(n, k, result, i + 1, list);
+		list.pop();
+	}
+}
+
 function main () {
-	let intervals = [[1,3],[6,9]], newInterval = [2,5];
-	// let result = marge_sort(intervals, newInterval);
-	// console.log("result ", result);
-	let result = marge_greed(intervals, newInterval);
+	let result = createList(4, 2);
 	console.log("result ", result);
 }
 
